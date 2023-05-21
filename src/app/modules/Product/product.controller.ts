@@ -3,6 +3,7 @@ import {
   getAllProductsFromDatabase,
   getProductByIdFromDatabase,
 } from "./product.service";
+import { sendApiResponse } from "../../utils/responseHandler";
 
 export const getAllProducts = async (
   req: Request,
@@ -10,7 +11,7 @@ export const getAllProducts = async (
   next: NextFunction
 ) => {
   const products = await getAllProductsFromDatabase();
-  res.send(products);
+  sendApiResponse(res, 200, true, products);
 };
 
 export const getProductById = async (
@@ -20,5 +21,5 @@ export const getProductById = async (
 ) => {
   const { id } = req.params;
   const product = await getProductByIdFromDatabase(id);
-  res.send(product);
+  sendApiResponse(res, 200, true, product);
 };
